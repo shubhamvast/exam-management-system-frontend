@@ -10,25 +10,28 @@ import { IoClose } from "react-icons/io5";
 import printText from "../../commonMethods/printText";
 
 function UpadatePaperSetterProfile() {
+  
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+  
+    const user = useSelector((state) => state.userReducer.currentUser);
 
   const token = useSelector((state) => state.loginReducer.token);
   const [decode, setDecode] = useState("");
   useEffect(() => {
     if (token) {
       const decode = jwt_decode(token);
-
-      decode.name = printText(decode.name);
-      decode.role = printText(decode.role);
-
       setDecode(decode);
       dispatch(getCurrentUser(decode._id));
     }
   }, []);
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+   //upadate when profile option changes
+   useEffect(() => {
+    dispatch(getCurrentUser(decode._id));
+}, [user._id]);
 
-  const user = useSelector((state) => state.userReducer.currentUser);
+
   const schema = yup.object().shape({
     firstname: yup.string().required().min(3).max(50),
     lastname: yup.string().required().min(3).max(50),
@@ -77,8 +80,8 @@ function UpadatePaperSetterProfile() {
         </div>
         <div>
           <div className="flex flex-col justify-center items-center mb-4 mt-[-20px]">
-            <span className="font-semibold text-2xl  ">{decode.name}</span>
-            <p className="text-base font-semibold mb-1">{decode.role}</p>
+            <span className="font-semibold text-2xl  ">{printText(user.firstName + " "+ user.lastName)}</span>
+            <p className="text-base font-semibold mb-1">{printText(user.role)}</p>
 
             <hr className="h-[2px] w-full  border-yellow-300 bg-yellow-500" />
           </div>

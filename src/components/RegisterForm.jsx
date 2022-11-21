@@ -37,6 +37,8 @@ const RegisterForm = () => {
 
   };
 
+  // h-[calc(100vh-76px)]
+
   return (
    <div 
       style={{
@@ -48,7 +50,8 @@ const RegisterForm = () => {
         backgroundBlendMode: "darken",
 
       }}
-      className="h-[calc(100vh-76px)] w-full overflow-auto paperWindow"
+
+      className="h-fit w-full overflow-auto "
     >
      <form
       className="  w-1/3 mx-auto my-5 px-14 py-5 border-2 rounded-xl shadow-4xl backdrop-blur-md  border-yellow-300"

@@ -23,7 +23,7 @@ const AddQuestionBank = () => {
 
   const schema = yup.object().shape({
     answer: yup.array(),
-    subject:yup.string(),
+    subject: yup.string(),
     complexityLevel: yup.string().required("Please Choose level"),
     marks: yup.number().required("Please enter marks"),
     optionA: yup.string().required("Please provide option"),
@@ -83,6 +83,7 @@ const AddQuestionBank = () => {
                   className="block mb-2 text-sm font-medium  dark:text-gray-300"
                 >
                   Question
+                  <span className="text-red-600 text-lg">*</span>
                 </label>
                 <input
                   type="text"
@@ -102,6 +103,7 @@ const AddQuestionBank = () => {
                   className="block mb-2 text-sm font-medium dark:text-gray-300"
                 >
                   Subject
+                  <span className="text-red-600 text-lg">*</span>
                 </label>
                 <select
                   {...register("subject")}
@@ -125,6 +127,7 @@ const AddQuestionBank = () => {
                   className="block mb-2 text-sm font-medium dark:text-gray-300"
                 >
                   Topic
+                  <span className="text-red-600 text-lg">*</span>
                 </label>
                 <select
                   {...register("topic")}
@@ -147,6 +150,7 @@ const AddQuestionBank = () => {
                   className="block mb-2 text-sm font-medium  dark:text-gray-300"
                 >
                   Marks
+                  <span className="text-red-600 text-lg">*</span>
                 </label>
                 <input
                   type="number"
@@ -166,6 +170,7 @@ const AddQuestionBank = () => {
                   className="block mb-2 text-sm font-medium dark:text-gray-300"
                 >
                   Complexity Level
+                  <span className="text-red-600 text-lg">*</span>
                 </label>
                 <select
                   {...register("complexityLevel")}
@@ -311,8 +316,6 @@ const AddQuestionBank = () => {
         <div className="flex justify-center">
           <button
             type="submit"
-            // className=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm h-full w-full mb-2 px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-
             className=" text-white bg-[#1A212D] hover:bg-[#323d52] focus:outline-none focus:ring-2 focus:ring-orange-400 focus:bg-yellow-500 font-medium rounded-full text-sm h-full w-3/5 mt-2 px-5 py-2.5 text-center "
           >
             Submit

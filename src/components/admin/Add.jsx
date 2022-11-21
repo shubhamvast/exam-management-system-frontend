@@ -3,7 +3,7 @@ import { MdAdd } from "react-icons/md";
 import { NavLink, Outlet } from "react-router-dom";
 const Add = () => {
   return (
-    <div className="px-4 h-[calc(100vh-60px)] mt-2 overflow-x-auto paperWindow">
+    <div className="px-4 h-[calc(100vh-60px)] mt-2 overflow-auto">
   
     <div className="flex item-center">
       <NavLink

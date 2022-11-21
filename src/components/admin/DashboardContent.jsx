@@ -7,12 +7,16 @@ function DashboardContent() {
 
   //dashboard content strip
   return (
-    <div className="px-4 h-[calc(100vh-60px)] overflow-x-auto paperWindow">
+    <div className="px-4 h-[calc(100vh-60px)] w-full">
       <div className="flex justify-between items-center   pt-4 ">
         <div className="font-bold text-xl">Dashboard</div>
-        <NavLink to={   
-            pathname == "/admin/dashboard/subjects" ? "/admin/add/subject": "/admin/add/user"
-              }>
+        <NavLink
+          to={
+            pathname == "/admin/dashboard/subjects"
+              ? "/admin/add/subject"
+              : "/admin/add/user"
+          }
+        >
           <MdAdd
             className="bg-yellow-400 rounded-full text-white p-[3px] shadow-md cursor-pointer"
             size={36}
@@ -37,7 +41,9 @@ function DashboardContent() {
         className="border-[2px] border-t-0 border-slate-300 rounded-md"
         style={{ marginTop: "-2px" }}
       />
-      <Outlet />
+      <div className="h-[calc(100vh-150px)] overflow-auto w-full ">
+        <Outlet />
+      </div>
     </div>
   );
 }

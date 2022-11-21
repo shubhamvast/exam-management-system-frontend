@@ -8,7 +8,13 @@ function ExaminerDashboardContent() {
       <div className="flex justify-between items-center   pt-4 ">
         <div className="font-bold text-xl">Dashboard</div>
 
-        <NavLink to= {(location.pathname === "/examiner/dashboard/topics")?"/examiner/add/topic":"/examiner/add/questionBank"}>
+        <NavLink
+          to={
+            location.pathname === "/examiner/dashboard/topics"
+              ? "/examiner/add/topic"
+              : "/examiner/add/questionBank"
+          }
+        >
           <MdAdd
             className="bg-yellow-400 rounded-full text-white p-[3px] shadow-md cursor-pointer"
             size={36}
@@ -33,9 +39,10 @@ function ExaminerDashboardContent() {
         className="border-[2px] border-t-0 border-slate-300 rounded-md"
         style={{ marginTop: "-2px" }}
       />
-     
-     <Outlet />
-    
+
+      <div className="h-[calc(100vh-140px)] w-full">
+        <Outlet />
+      </div>
     </div>
   );
 }

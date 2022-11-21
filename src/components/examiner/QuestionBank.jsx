@@ -27,6 +27,15 @@ const QuestionBank = () => {
     dispatch(getAllSubjects());
   },[subjects.length]);
 
+  useEffect(()=>{
+
+    if(topics.length===0){
+        setSearchTopic("")
+    }
+
+  },[topics.length])
+
+
   const head = ["Question", "Answer"];
 
   const handeleDeleteQuestionBank = (id) => {
@@ -43,6 +52,8 @@ const QuestionBank = () => {
     setSearchTopic(topicId);
     dispatch(filterQuestions({ searchSubject, searchTopic: topicId }));
   };
+
+ 
   return (
     <div>
       <div className="flex mt-2">
@@ -62,9 +73,7 @@ const QuestionBank = () => {
           })}
         </select>
 
-        {topics.length == 0 ? (
-          ""
-        ) : (
+        {topics.length == 0 ?"": (
           <select
             name="topic"
             id="topic"

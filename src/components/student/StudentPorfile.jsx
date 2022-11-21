@@ -30,7 +30,7 @@ const StudentPorfile = (props) => {
       </div>
       <hr className="h-1 bg-red-500" />
       <div className="w-4/5 mx-auto mt-2 flex flex-col">
-        <NavLink className="px-2 py-3 flex cursor-pointer hover:bg-slate-200 rounded"
+        <NavLink className="px-2 py-4 flex cursor-pointer hover:bg-slate-200 rounded"
         
         onClick={() => {
             setShowProfileOptions(false);
@@ -41,12 +41,12 @@ const StudentPorfile = (props) => {
           <BsPen size={25} />
           <span className="ml-3">Change Password</span>
         </NavLink>
-        <NavLink className="px-2 py-3 flex cursor-pointer hover:bg-slate-200 rounded">
+        <NavLink className="px-2 py-4 flex cursor-pointer hover:bg-slate-200 rounded">
           <MdNotifications size={25} />
           <span className="ml-3">Notifications</span>
         </NavLink>
         <NavLink
-          className="px-2 py-3 flex cursor-pointer hover:bg-slate-200 rounded"
+          className="px-2 py-4 flex cursor-pointer hover:bg-slate-200 rounded"
           onClick={handleLogOut}
         >
           <MdLogout size={25} />

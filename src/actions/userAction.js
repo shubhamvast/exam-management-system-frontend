@@ -1,6 +1,8 @@
 import axios from "axios";
 import * as actions from "./actionTypes";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { logOutUser } from "./loginAction";
 
 const apiEndPoint = process.env.REACT_APP_API_URL + "users";
 
@@ -22,15 +24,23 @@ export const registerStudent = (student) => (dispatch) => {
       position: "top-center",
       theme: "dark",
     });
+
+  const registrestionSuccessfull = (message) =>
+    toast.success(message, {
+      position: "top-center",
+      theme: "light",
+    });
+
   student["role"] = "student";
   axios
     .post(apiEndPoint, student)
-    .then((response) =>
+    .then((response) => {
+      registrestionSuccessfull("Registered successfully...!");
       dispatch({
         type: actions.ADD_USER,
         payload: response.data,
-      })
-    )
+      });
+    })
     .catch((err) => {
       registrestionFailed("Username must be unique");
     });
@@ -62,53 +72,79 @@ export const addUser = (user) => (dispatch, getState) => {
     .post(apiEndPoint, user, {
       headers: { "x-auth-token": getState().loginReducer.token },
     })
-    .then((response) =>
+    .then((response) => {
+      toast.success("User added successfully...", {
+        autoClose: 1000,
+        position: "top-center",
+      });
       dispatch({
         type: actions.ADD_USER,
         payload: response.data,
-      })
-    )
+      });
+    })
     .catch((err) => console.log(err.message));
 };
 
 export const changePassword = (user) => (dispatch, getState) => {
+  const passwordNotChanged = (message) => {
+    toast.error(message, {
+      position: "top-center",
+      theme: "light",
+      autoClose: 1000,
+    });
+  };
+
+  const passwordChanged = (message) => {
+    toast.success(message, {
+      position: "top-center",
+      theme: "light",
+      autoClose: 1000,
+    });
+  };
+
   axios
-    .patch(
-      apiEndPoint + "/" + user.id,
-      {
-        password: user.password,
-      },
-      {
-        headers: { "x-auth-token": getState().loginReducer.token },
-      }
-    )
+    .patch(apiEndPoint + "/" + user.id, user, {
+      headers: { "x-auth-token": getState().loginReducer.token },
+    })
     .then((response) => {
+      passwordChanged("Password changed successfully!");
       dispatch({
         type: actions.CHANGE_PASSWORD,
         payload: response.data,
       });
+      dispatch(logOutUser());
     })
-    .catch((error) => console.log(error.message));
+    .catch((error) => {
+      passwordNotChanged(error.response.data);
+    });
 };
 
-
 export const editProfile = (user) => (dispatch, getState) => {
+  const profileEditedSuccessfully = (message) => {
+    toast.success(message, {
+      position: "top-center",
+      theme: "light",
+      autoClose: 1000,
+    });
+  };
+
   axios
     .post(
-      apiEndPoint + "/editProfile" ,
+      apiEndPoint + "/editProfile",
       {
         firstname: user.firstname,
         lastname: user.lastname,
         email: user.email,
         phone: user.phone,
         username: user.username,
-        id:user.id
+        id: user.id,
       },
       {
         headers: { "x-auth-token": getState().loginReducer.token },
       }
     )
     .then((response) => {
+      profileEditedSuccessfully("Profiel Upadated Successfully....");
       dispatch({
         type: actions.EDIT_PROFILE,
         payload: response.data,
@@ -116,7 +152,6 @@ export const editProfile = (user) => (dispatch, getState) => {
     })
     .catch((error) => console.log(error.message));
 };
-
 
 export const updateUser = (user) => (dispatch, getState) => {
   axios
@@ -135,6 +170,10 @@ export const updateUser = (user) => (dispatch, getState) => {
       }
     )
     .then((response) => {
+      toast.success("User updated successfully...", {
+        autoClose: 1000,
+        position: "top-center",
+      });
       dispatch({
         type: actions.UPDATE_USER,
         payload: response.data,
@@ -143,12 +182,16 @@ export const updateUser = (user) => (dispatch, getState) => {
     .catch((error) => console.log(error.message));
 };
 
-
 export const softDeleteUser = (user) => (dispatch, getState) => {
+  if (user.operation === "Active") {
+    if (!window.confirm("Are you sure to Inactive User?")) return;
+  } else {
+    if (!window.confirm("Are you sure to Active User?")) return;
+  }
   axios
     .post(
       apiEndPoint + "/softDeleteUser",
-     user,
+      { userId: user.userId },
       {
         headers: { "x-auth-token": getState().loginReducer.token },
       }
@@ -162,20 +205,55 @@ export const softDeleteUser = (user) => (dispatch, getState) => {
     .catch((error) => console.log(error.message));
 };
 
-
-
-
-
 export const deleteUser = (id) => (dispatch, getState) => {
+  if (!window.confirm("Are you sure to Delete user?")) return;
+
   axios
     .delete(apiEndPoint + "/" + id, {
       headers: { "x-auth-token": getState().loginReducer.token },
     })
     .then((response) => {
+      toast.success("User deleted successfully...!", {
+        autoClose: 1000,
+        position: "top-center",
+      });
       dispatch({
         type: actions.DELETE_USER,
         payload: response.data,
       });
     })
     .catch((error) => console.log(error.message));
+};
+
+export const forgotPassword = (data) => (dispatch) => {
+  toast
+    .promise(axios.post(apiEndPoint + "/forgotPassword", data), {
+      pending: "Processing Forgot Password request",
+
+      success:
+        "An email with reset password link is sent to you on your email Id",
+    })
+    .then((response) => {
+      setTimeout(() => {
+        window.location.href = "http://localhost:3000/";
+      }, 4000);
+    })
+    .catch((error) => toast.error(error.response.data));
+};
+
+export const resetPassword = (data) => (dispatch) => {
+  toast
+    .promise(axios.post(apiEndPoint + "/resetPassword", data), {
+      pending: "Processing Reset Password request",
+
+      success: "Password reset successfully..!",
+    })
+    .then((response) => {
+      setTimeout(() => {
+        window.location.href = "http://localhost:3000/";
+      }, 4000);
+    })
+    .catch((error) => {
+      toast.error(error.response.data);
+    });
 };

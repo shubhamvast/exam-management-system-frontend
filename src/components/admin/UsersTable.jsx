@@ -5,16 +5,16 @@ import { NavLink } from "react-router-dom";
 import printText from "../../commonMethods/printText";
 
 const UsersTable = (props) => {
-  const { items, head, handleDelete,handleClick } = props;
-
- 
+  const { items, head, handleDelete, handleClick } = props;
 
   return (
     <>
       <table className="table-auto border-collapse  w-full mt-2 ">
         <thead>
           <tr className="bg-[#172337] text-white h-10 flex justify-between items-center pr-24">
-            <th className="w-4/5 text-left pl-6 font-thin text-gray-100">{head}</th>
+            <th className="w-4/5 text-left pl-6 font-thin text-gray-100">
+              {head}
+            </th>
             <th className=" text-center font-thin  text-gray-100 ">Status</th>
             <th className=" text-center font-thin  text-gray-100 ">Actions</th>
           </tr>
@@ -24,7 +24,7 @@ const UsersTable = (props) => {
             return (
               <tr
                 key={index}
-                className=" h-16  flex justify-between items-center pr-20  border-b-2 border-gray-100 "
+                className=" py-2  flex justify-between items-center pr-20  border-b-2 border-gray-100 "
               >
                 <td className="w-4/5 text-left pl-4 font-normal text-gray-600  ">
                   <div>
@@ -34,6 +34,12 @@ const UsersTable = (props) => {
                     </span>
                   </div>
                 </td>
+                {/* <td>
+                  <label class="inline-flex relative items-center cursor-pointer">
+                    <input type="checkbox" value="" class="sr-only peer" />
+                    <div class="w-14 h-7 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                  </label>
+                </td> */}
                 <td className="  text-gray-500  flex   ">
                   {item.isActive ? (
                     <button

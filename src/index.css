@@ -16,11 +16,3 @@ code {
 }
 
 
-/* to manage scroll bar*/
-.paperWindow{
-  overflow-y: scroll;
-  scrollbar-width: none;
-}
-.paperWindow::-webkit-scrollbar { 
-  display: none;  /* Safari and Chrome */
-}

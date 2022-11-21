@@ -43,7 +43,7 @@ const ExamPaperTable = (props) => {
                         </div>
                         <p className="h-full  font-normal text-lg ml-4">
                           {printQuestionAnswer(
-                            paperQuestion.question?.questionText
+                            paperQuestion.question?.questionText.trim()
                           )}
                         </p>
                       </div>
@@ -52,7 +52,7 @@ const ExamPaperTable = (props) => {
                           <i className="font-semibold">A.</i>
                           <span className="text-base ">
                             {` ${printQuestionAnswer(
-                              paperQuestion.question?.optionA
+                              paperQuestion.question?.optionA.trim()
                             )}`}
                           </span>
                         </span>
@@ -60,7 +60,7 @@ const ExamPaperTable = (props) => {
                           <i className="font-semibold">B.</i>
                           <span className="text-base">
                             {` ${printQuestionAnswer(
-                              paperQuestion.question?.optionB
+                              paperQuestion.question?.optionB.trim()
                             )}`}
                           </span>
                         </span>
@@ -68,7 +68,7 @@ const ExamPaperTable = (props) => {
                           <i className="font-semibold">C.</i>
                           <span className="text-base">
                             {` ${printQuestionAnswer(
-                              paperQuestion.question?.optionC
+                              paperQuestion.question?.optionC.trim()
                             )}`}
                           </span>
                         </span>
@@ -76,7 +76,7 @@ const ExamPaperTable = (props) => {
                           <i className="font-semibold">D.</i>
                           <span className="text-base">
                             {` ${printQuestionAnswer(
-                              paperQuestion.question?.optionD
+                              paperQuestion.question?.optionD.trim()
                             )}`}
                           </span>
                         </span>

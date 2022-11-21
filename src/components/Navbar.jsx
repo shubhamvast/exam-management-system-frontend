@@ -4,8 +4,6 @@ import emsLogo from "../assets/image/ems logo 1.png";
 
 export const Navbar = () => {
   return (
-
-    
     <nav className="bg-gray-100 border-gray-200 px-2 sm:px-4 py-2.5  dark:bg-gray-900 shadow-md">
       <div className="container flex flex-wrap justify-between items-center mx-auto">
         <NavLink
@@ -41,22 +39,28 @@ export const Navbar = () => {
             ></path>
           </svg>
         </button>
-        <div className="hidden w-full md:block md:w-auto" id="navbar-default">
-          <ul className="flex flex-col p-4 mt-4 bg-gray-50 rounded-lg shadow-md border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-            <li>
+        <div className="hidden w-full md:block md:w-auto" id="navbar-default ">
+          <ul className="flex flex-col items-center px-6 py-3 mt-4 bg-gray-50 rounded-lg shadow-md border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 ">
+            {/* <li>
               <NavLink
-                to=""
-                className="block py-2 pr-4 pl-3 bg-yellow-700  text-white rounded md:bg-transparent md:text-yellow-500 md:p-0 dark:text-white"
+                to="/"
+                className="block py-2 pr-4 pl-3   text-gray-700 rounded md:bg-transparent "
                 aria-current="page"
+                style={({ isActive }) => {
+                  return { color: isActive ? "yellow" : "black" };
+                }}
               >
                 Home
               </NavLink>
-            </li>
-           
+            </li> */}
+
             <li>
               <NavLink
                 to="login"
-                className="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-yellow-500 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                className="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0  md:p-0 "
+                style={({ isActive }) => {
+                  return { color: isActive ? "yellow" : "black" };
+                }}
               >
                 Log In
               </NavLink>
@@ -64,12 +68,14 @@ export const Navbar = () => {
             <li>
               <NavLink
                 to="register"
-                className="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-yellow-500 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                className="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 "
+                style={({ isActive }) => {
+                  return { color: isActive ? "yellow" : "black" };
+                }}
               >
                 Register
               </NavLink>
             </li>
-          
           </ul>
         </div>
       </div>

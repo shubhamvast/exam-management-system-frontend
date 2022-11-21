@@ -9,26 +9,20 @@ export const loginAction = (data) => (dispatch) => {
 
   //message if login failed
   const loginFailed = (message) =>
-    toast.warn(message, {
+    toast.error(message, {
       position: "top-center",
-      theme: "dark",
+      theme: "colored",
+      autoClose:1000
     });
 
-  //message if login successful
-  const loginSucceful = (message) => {
-    toast.success(message, {
-      position: "top-center",
-      theme: "light",
-      autoClose: 2000,
-    });
-  };
+ 
 
 
   axios
     .post(apiEndPoint, data)
     .then((response) => {
-      loginSucceful("Login successfully!");
       sessionStorage.setItem("token", response.data);
+
       dispatch({
         type: actions.LOGIN_USER,
         payload: response.data,
@@ -50,14 +44,6 @@ export const loadLogin = () => {
 
 //logout code 
 export const logOutUser = () => {
-  const logOut = (message) =>
-    toast.success(message, {
-      position: "top-center",
-      theme: "dark",
-      autoClose: 2000,
-
-    });
-  logOut("Log out successfully!");
   sessionStorage.setItem("token", "");
   return {
     type: actions.LOG_OUT_USER,

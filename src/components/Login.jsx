@@ -8,10 +8,11 @@ import { Link, redirect, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAction, logOutUser } from "../actions/loginAction";
 import jwt_decode from "jwt-decode";
+import * as actions from "../actions/actionTypes"
 
 import { toast } from "react-toastify";
 
-const schema = yup.object().shape({
+  const schema = yup.object().shape({
   username: yup.string().required("Please enter Username").min(5).max(255),
   password: yup.string().required("Please enter Password").min(8).max(1024),
 });
@@ -31,9 +32,17 @@ const Login = () => {
       const decode = jwt_decode(token);
       if (!decode.isActive) {
         notify("You are not authorized user!");
-        dispatch(logOutUser());
+
+        sessionStorage.setItem("token", "");
+
+        dispatch(  {
+          type: actions.LOG_OUT_USER,
+        });
        return navigate("/");
       }
+
+
+
      if(decode.role=="admin") navigate(`/admin/dashboard/subjects`);
      else if(decode.role=="examiner") navigate(`/examiner/dashboard/topics`);
      else if(decode.role == "paperSetter") navigate("/paperSetter/dashboard/papers");
@@ -50,6 +59,7 @@ const Login = () => {
   } = useForm({ resolver: yupResolver(schema) });
 
   const handleLoginSubmit = (data) => {
+ 
     dispatch(loginAction(data));
   };
   return (
@@ -103,7 +113,7 @@ const Login = () => {
             LOG IN
           </button>
           <div>
-            <Link className="text-blue-500 float-right">forgot password?</Link>
+            <Link to="/forgotPassword" className="text-blue-500 float-right">forgot password?</Link>
           </div>
         </form>
       </div>

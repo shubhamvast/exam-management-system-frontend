@@ -57,11 +57,16 @@ import ChangeExaminerPassword from "./components/examiner/ChangeExaminerPassword
 import UpadateExaminerProfile from "./components/examiner/UpdateExaminerProfile";
 import ChangePaperSetterPassword from "./components/paperSetter/ChangePaperSetterPassword";
 import UpadatePaperSetterProfile from "./components/paperSetter/UpadatePaperSetterProfile";
+import ForgotPassword from "./components/ForgotPassword";
+import ResetPassword, { getToken } from "./components/ResetPassword";
+import ErrorPage from "./ErrorPage";
+import ChangeStudentPassword from "./components/student/ChangeStudentPassword";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
@@ -70,6 +75,15 @@ const router = createBrowserRouter([
       {
         path: "login",
         element: <Login />,
+      },
+      {
+        path: "forgotPassword",
+        element: <ForgotPassword />,
+      },
+      {
+        path: "resetPassword/:token",
+        loader: getToken,
+        element: <ResetPassword />,
       },
       {
         path: "register",
@@ -185,7 +199,7 @@ const router = createBrowserRouter([
           },
           {
             path: "changePassword",
-            element: <ChangeExaminerPassword/>,
+            element: <ChangeExaminerPassword />,
           },
           {
             path: "changeProfile",
@@ -246,13 +260,12 @@ const router = createBrowserRouter([
           },
           {
             path: "changePassword",
-            element: <ChangePaperSetterPassword/>,
+            element: <ChangePaperSetterPassword />,
           },
           {
             path: "changeProfile",
-            element: <UpadatePaperSetterProfile/>,
+            element: <UpadatePaperSetterProfile />,
           },
-          
         ],
       },
       {
@@ -283,7 +296,7 @@ const router = createBrowserRouter([
           },
           {
             path: "changePassword",
-            element: <ChangePaperSetterPassword/>,
+            element: <ChangeStudentPassword />,
           },
         ],
       },

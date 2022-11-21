@@ -1,5 +1,7 @@
 export const LOGIN_USER = "LOGIN_USER";
 export const LOG_OUT_USER = "LOG_OUT_USER";
+export const FORGOT_PASSWORD = "FORGOT_PASSWORD"
+export const RESET_PASSWORD = "RESET_PASSWORD"
 
 export const GET_ALL_SUBJECTS = "GET_ALL_SUBJECTS";
 export const ADD_SUBJECT = "ADD_SUBJECT";

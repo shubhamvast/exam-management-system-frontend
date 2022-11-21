@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteSubject, getAllSubjects } from "../../actions/subjectAction";
 import AdminItemsTable from "./AdminItemsTable";
@@ -6,8 +6,12 @@ import AdminItemsTable from "./AdminItemsTable";
 function Subject() {
   const subjects = useSelector((state) => state.subjectReducer.subjects);
   const dispatch = useDispatch();
+  const [count, setCount] = useState(10);
+  const [pageSize, setPageSize] = useState(8);
 
-  
+  const handlePageChange = () => {
+    console.log("in handle page change");
+  };
   useEffect(() => {
     dispatch(getAllSubjects());
   }, []);
@@ -17,7 +21,6 @@ function Subject() {
     dispatch(deleteSubject(id));
   };
 
-  
   return (
     <div>
       {subjects == 0 ? (
@@ -38,6 +41,9 @@ function Subject() {
           head="Subject Name"
           text="name"
           handleDelete={handleSubjectDelete}
+          count={count}
+          pageSize={pageSize}
+          handlePageChange={handlePageChange}
         />
       )}
     </div>

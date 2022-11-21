@@ -8,7 +8,7 @@ import printQuestionAnswer from "../../commonMethods/printQuestionAnswer";
 const ExaminerItemsTable = (props) => {
   const { items, head, text, handleDelete } = props;
   return (
-    <div className="h-[calc(100vh-60px)] w-full overflow-auto paperWindow">
+    <div className="h-[calc(100vh-190px)] w-full overflow-auto paperWindow">
       <table className="table-auto border-collapse  w-full mt-2 ">
         <thead>
           <tr className="bg-[#172337] text-white h-10 flex justify-between items-center pr-24">
@@ -22,7 +22,7 @@ const ExaminerItemsTable = (props) => {
             <th className=" text-center font-thin  text-gray-100 ">Actions</th>
           </tr>
         </thead>
-        <tbody >
+        <tbody>
           {items.map((item, index) => {
             return (
               <tr
